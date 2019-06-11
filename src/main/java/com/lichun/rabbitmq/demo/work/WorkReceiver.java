@@ -26,7 +26,7 @@ public class WorkReceiver {
                 channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
             }
         };
-        channel.basicConsume(QUEUE_NAME, false, deliverCallback, consumerTag -> {});
+        channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> {});
     }
 
     public static final void doWork(String message) {
