@@ -23,10 +23,11 @@ public class WorkReceiver {
                 doWork(message);
             } finally {
                 System.out.println(" [x] Done");
+                //告知MQ，消费者已获取消息应答
                 channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
             }
         };
-        channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> {});
+        channel.basicConsume(QUEUE_NAME, false, deliverCallback, consumerTag -> {});
     }
 
     public static final void doWork(String message) {
